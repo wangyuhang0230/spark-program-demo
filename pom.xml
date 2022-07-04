@@ -72,6 +72,13 @@
       <version>${spark.version}</version>
     </dependency>
 
+    <!-- Spark Yarn -->
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-yarn_${scala.compat.version}</artifactId>
+      <version>${spark.version}</version>
+    </dependency>
+
     <!-- Phoenix -->
     <dependency>
       <groupId>org.apache.phoenix</groupId>
@@ -91,17 +98,17 @@
 <!--      <version>2.7.4</version>-->
 <!--    </dependency>-->
 
-<!--    <dependency>-->
-<!--      <groupId>com.alibaba</groupId>-->
-<!--      <artifactId>fastjson</artifactId>-->
-<!--      <version>${fastjson.version}</version>-->
-<!--    </dependency>-->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>${fastjson.version}</version>
+    </dependency>
 
     <!--        读取excel xlsx-->
     <dependency>
       <groupId>com.crealytics</groupId>
       <artifactId>spark-excel_2.11</artifactId>
-      <version>0.12.2</version>
+      <version>0.13.7</version>
     </dependency>
 
 
