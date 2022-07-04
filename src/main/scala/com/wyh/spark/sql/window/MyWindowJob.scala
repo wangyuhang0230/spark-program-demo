@@ -1,4 +1,4 @@
-package com.wyh.spark.window
+package com.wyh.spark.sql.window
 
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.expressions.Window
