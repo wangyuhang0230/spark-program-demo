@@ -13,6 +13,7 @@ class BaseLocalSpark extends BaseFunctions {
     .builder()
     .appName(this.getClass.getSimpleName)
     .master("local[*]")
+    .config("hive.metastore.dml.events","false") // 解决 Hive 载入数据 BUG
     .enableHiveSupport()
     .getOrCreate()
 
