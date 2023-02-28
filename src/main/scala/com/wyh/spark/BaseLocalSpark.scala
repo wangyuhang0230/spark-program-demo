@@ -7,7 +7,7 @@ import org.apache.spark.sql.SparkSession
  * @since 2023-02-15 11:04
  * */
 class BaseLocalSpark extends BaseFunctions {
-  System.setProperty("HADOOP_USER_NAME", "hdfs")
+  System.setProperty("HADOOP_USER_NAME", "hive")
 
   val spark: SparkSession = SparkSession
     .builder()
