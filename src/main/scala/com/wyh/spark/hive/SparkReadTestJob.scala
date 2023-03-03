@@ -9,10 +9,10 @@ import com.wyh.spark.BaseLocalSpark
 object SparkReadTestJob extends BaseLocalSpark{
   def main(args: Array[String]): Unit = {
 
-    val zkUrl = prop.getProperty("zkUrl")
+    val zkUrl = prop.getProperty("phoenix.zkUrl")
     val hive_table = prop.getProperty("hive.table")
     val phoenix_table = prop.getProperty("phoenix.table")
-    val month = prop.getProperty("select.month").toInt
+    val month = prop.getProperty("hive.select.month").toInt
 
     import spark.sql
 

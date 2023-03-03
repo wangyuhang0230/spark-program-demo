@@ -14,7 +14,7 @@ object SparkPhoenixJob extends BaseLocalSpark{
     import spark.implicits._
     import org.apache.spark.sql.functions._
 
-    val zkUrl = prop.getProperty("zkUrl")
+    val zkUrl = prop.getProperty("phoenix.zkUrl")
     val table = prop.getProperty("phoenix.table")
 
     val hisData: DataFrame = spark.read.format("csv")
