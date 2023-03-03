@@ -31,6 +31,7 @@
     <spark.version>2.4.8</spark.version>
     <hadoop.version>2.7.3</hadoop.version>
     <hive.version>3.1.0</hive.version>
+    <doris.version>1.2.2</doris.version>
 
 
     <phoenix.version>dora-fix-5.0.0.3.1.4.0-315</phoenix.version>
@@ -92,6 +93,13 @@
       <artifactId>spark-hive_${scala.compat.version}</artifactId>
       <version>${spark.version}</version>
     </dependency>
+
+    <!--  Spark Doris  -->
+<!--    <dependency>-->
+<!--      <groupId>org.apache.doris</groupId>-->
+<!--      <artifactId>spark-doris-connector-2.3_2.11</artifactId>-->
+<!--      <version>1.1.0</version>-->
+<!--    </dependency>-->
 
     <!--  Hadoop  -->
     <dependency>
