@@ -1,6 +1,7 @@
 package com.wyh.spark.hbase
 
 import com.wyh.spark.BaseLocalSpark
+import com.wyh.spark.conf.BaseConf
 import org.apache.spark.sql.types.{DoubleType, IntegerType, LongType, StringType, StructField, StructType, TimestampType}
 import org.apache.spark.sql.{DataFrame, SaveMode}
 
@@ -13,9 +14,6 @@ object SparkPhoenixJob extends BaseLocalSpark{
 
     import spark.implicits._
     import org.apache.spark.sql.functions._
-
-    val zkUrl = prop.getProperty("phoenix.zkUrl")
-    val table = prop.getProperty("phoenix.table")
 
     val hisData: DataFrame = spark.read.format("csv")
       .option("header", "true")
@@ -41,7 +39,7 @@ object SparkPhoenixJob extends BaseLocalSpark{
         .format("org.apache.phoenix.spark")
         // 只支持 Overwrite 模式
         .mode(SaveMode.Overwrite)
-        .options(Map("table" -> table, "zkUrl" -> zkUrl))
+        .options(Map("table" -> BaseConf.phoenix_table, "zkUrl" -> BaseConf.phoenix_zkUrl))
         .save()
     }
 

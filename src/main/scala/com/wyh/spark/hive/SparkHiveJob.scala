@@ -1,6 +1,7 @@
 package com.wyh.spark.hive
 
 import com.wyh.spark.BaseLocalSpark
+import com.wyh.spark.conf.BaseConf
 import org.apache.spark.sql.SaveMode
 import org.apache.spark.sql.types._
 
@@ -63,9 +64,9 @@ object SparkHiveJob extends BaseLocalSpark {
     cleaningDF
       .write
       .format("Hive")
-      .mode(SaveMode.Append)
+      .mode(BaseConf.hive_saveMode)
       .partitionBy("m")
-      .saveAsTable("his_02004_2022_p_orc")
+      .saveAsTable(BaseConf.hive_table)
 
 
 

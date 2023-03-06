@@ -1,6 +1,7 @@
 package com.wyh.spark.sql.jdbc
 
 import com.wyh.spark.BaseLocalSpark
+import com.wyh.spark.conf.BaseConf
 import org.apache.spark.sql.types.{DoubleType, IntegerType, LongType, StringType, StructField, StructType, TimestampType}
 import org.apache.spark.sql.{DataFrame, SaveMode}
 
@@ -15,19 +16,12 @@ object Spark2OBJob extends BaseLocalSpark{
 
 //    val dssTestDf = spark.read
 //      .format("jdbc")
-//      .option("url", "jdbc:mysql://10.10.53.25:2883/test")
+//      .option("url", BaseConf.ob_url)
 ////      .option("driver", "org.mariadb.jdbc.Driver")
-//      .option("dbtable", "dss_test")
-//      .option("user", "root@dora#obcluster")
-//      .option("password", "ThtfA25__600100")
+//      .option("dbtable", BaseConf.ob_table)
+//      .option("user", BaseConf.ob_username)
+//      .option("password", BaseConf.ob_password)
 //      .load()
-
-    val obUrl = prop.getProperty("ob.url")
-    val table = prop.getProperty("ob.table")
-    val packet = prop.getProperty("ob.packet")
-    val saveMode = prop.getProperty("ob.save.mode")
-    val username = prop.getProperty("ob.username")
-    val password = prop.getProperty("ob.password")
 
     val hisData: DataFrame = spark.read.format("csv")
       .option("header", "true")
@@ -48,14 +42,14 @@ object Spark2OBJob extends BaseLocalSpark{
 
     hisData.write
       .format("jdbc")
-      .mode(saveMode)
-      .option("url", obUrl)
+      .mode(BaseConf.ob_saveMode)
+      .option("url", BaseConf.ob_url)
       .option("driver", "com.mysql.cj.jdbc.Driver")
-      .option("dbtable", table)
-      .option("user", username)
-      .option("password", password)
+      .option("dbtable", BaseConf.ob_table)
+      .option("user", BaseConf.ob_username)
+      .option("password", BaseConf.ob_password)
       .option("isolationLevel", "NONE")
-      .option("max_allowed_packet", packet)
+      .option("max_allowed_packet", BaseConf.ob_packet)
       .save()
 
 

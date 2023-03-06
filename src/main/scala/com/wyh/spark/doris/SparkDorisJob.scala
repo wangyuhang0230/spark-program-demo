@@ -1,6 +1,7 @@
 package com.wyh.spark.doris
 
 import com.wyh.spark.BaseLocalSpark
+import com.wyh.spark.conf.BaseConf
 import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.functions.from_unixtime
 import org.apache.spark.sql.types.{DoubleType, IntegerType, LongType, StringType, StructField, StructType, TimestampType}
@@ -11,14 +12,6 @@ import org.apache.spark.sql.types.{DoubleType, IntegerType, LongType, StringType
  * */
 object SparkDorisJob extends BaseLocalSpark {
   def main(args: Array[String]): Unit = {
-
-    val url = prop.getProperty("doris.url")
-    val username = prop.getProperty("doris.username")
-    val password = prop.getProperty("doris.password")
-    val table = prop.getProperty("doris.table")
-    val fenodes = prop.getProperty("doris.fenodes")
-    val dbTable = prop.getProperty("doris.db.table")
-    val saveMode = prop.getProperty("doris.save.mode")
 
     import spark.implicits._
 
@@ -51,19 +44,19 @@ object SparkDorisJob extends BaseLocalSpark {
     // jdbc 方式
 //    spark.read.format("jdbc")
 //      .option("driver", "com.mysql.cj.jdbc.Driver")
-//      .option("url", url)
+//      .option("url", BaseConf.doris_url)
 //      .option("dbtable", "t_user")
-//      .option("user", username)
-//      .option("password", password)
+//      .option("user", BaseConf.doris_username)
+//      .option("password", BaseConf.doris_password)
 //      .load()
 //      .show()
 
     // Doris 连接器方式
 //    val hisData = spark.read.format("doris")
-//      .option("doris.table.identifier", dbTable)
-//      .option("doris.fenodes", fenodes)
-//      .option("user", username)
-//      .option("password", password)
+//      .option("doris.table.identifier", BaseConf.doris_dbTable)
+//      .option("doris.fenodes", BaseConf.doris_fenodes)
+//      .option("user", BaseConf.doris_username)
+//      .option("password", BaseConf.doris_password)
 //      .load()
 
 //    val create = """CREATE TABLE IF NOT EXISTS test.his_02004_2022
@@ -81,26 +74,26 @@ object SparkDorisJob extends BaseLocalSpark {
 
     // jdbc 方式
 //    hisData.write.format("jdbc")
-//      .mode(saveMode)
+//      .mode(BaseConf.doris_saveMode)
 //      .option("driver", "com.mysql.cj.jdbc.Driver")
-//      .option("url", url)
-//      .option("dbtable", table)
-//      .option("user", username)
-//      .option("password", password)
+//      .option("url", BaseConf.doris_url)
+//      .option("dbtable", BaseConf.doris_table)
+//      .option("user", BaseConf.doris_username)
+//      .option("password", BaseConf.doris_password)
 //      .save()
 
     // Doris 连接器方式
     hisData
       .write.format("doris")
 //      .mode(saveMode)
-      .option("doris.table.identifier", dbTable)
-      .option("doris.fenodes", fenodes)
+      .option("doris.table.identifier", BaseConf.doris_dbTable)
+      .option("doris.fenodes", BaseConf.doris_fenodes)
       .option("sink.batch.size", "50000")
       .option("sink.max-retries", "1")
 //      .option("sink.properties.column_separator", ",")
 //      .option("sink.properties.line_delimiter", ",")
-      .option("user", username)
-      .option("password", password)
+      .option("user", BaseConf.doris_username)
+      .option("password", BaseConf.doris_password)
       .save()
 
 

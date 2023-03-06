@@ -12,12 +12,6 @@ class BaseLocalSpark extends BaseFunctions {
 
   System.setProperty("HADOOP_USER_NAME", "hive")
 
-  val prop: Properties = {
-    val prop = new Properties()
-    prop.load(this.getClass.getResourceAsStream("/demo.properties"))
-    prop
-  }
-
   val spark: SparkSession = if (runAtWindows) {
     getSpark("local[*]")
   } else {
