@@ -29,6 +29,8 @@ object BaseConf {
   val doris_fenodes: String = prop.getProperty("doris.fenodes")
   val doris_dbTable: String = prop.getProperty("doris.db.table")
   val doris_saveMode: String = prop.getProperty("doris.save.mode")
+  val doris_tablet_size: String = prop.getProperty("doris.request.tablet.size")
+  val doris_batch_size: String = prop.getProperty("doris.batch.size")
 
   val ob_url: String = prop.getProperty("ob.url")
   val ob_table: String = prop.getProperty("ob.table")
